@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gramatikiss - ¡Aprende Jugando! 🌟</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Quicksand:wght@600;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="bg-bubbles" id="bubblesContainer"></div>
+    <canvas id="confettiCanvas"></canvas>
+
+    <div class="app-container">
+
+        <button class="nav-back" id="globalBackBtn" onclick="goHome()" style="display: none;">
+            <i class="fa-solid fa-arrow-left"></i>
+        </button>
+
+        <!-- PANTALLA 1: BIENVENIDA -->
+        <div class="screen active" id="welcomeScreen">
+            <div class="logo-container">
+                <div class="logo-text">dramatikiss</div>
+                <div class="tagline">¡Aprende jugando con imágenes y sonidos! 🎨</div>
+            </div>
+            <button class="btn-giant" onclick="showLearnSelection()">
+                ¡Comenzar! <i class="fa-solid fa-play"></i>
+            </button>
+        </div>
+
+        <!-- PANTALLA 2: SELECCIÓN DE INTRODUCCIÓN -->
+        <div class="screen" id="learnSelectionScreen">
+            <h2 class="title-screen">¡Conoce a los Amigos Mágicos! 👀</h2>
+            <div class="intro-grid">
+                <div class="intro-card sujeto-theme" onclick="exploreConcept('sujeto')">
+                    <div class="card-emoji">🐶</div>
+                    <h3>Sujeto</h3>
+                    <p style="font-weight:bold; color:#718096;">¿Quién es?</p>
+                </div>
+                <div class="intro-card predicado-theme" onclick="exploreConcept('predicado')">
+                    <div class="card-emoji">🏃</div>
+                    <h3>Predicado</h3>
+                    <p style="font-weight:bold; color:#718096;">¿Qué hace?</p>
+                </div>
+                <div class="intro-card pronombre-theme" onclick="exploreConcept('pronombre')">
+                    <div class="card-emoji">🎭</div>
+                    <h3>Pronombre</h3>
+                    <p style="font-weight:bold; color:#718096;">El Disfraz</p>
+                </div>
+                <div class="intro-card adjetivo-theme" onclick="exploreConcept('adjetivo')">
+                    <div class="card-emoji">🎨</div>
+                    <h3>Adjetivo</h3>
+                    <p style="font-weight:bold; color:#718096;">¿Cómo es?</p>
+                </div>
+            </div>
+
+            <button class="btn-giant" style="margin-top: 30px; background: var(--purple-magic); box-shadow: 0 8px 0px #531cb3;" onclick="startGames()">
+                ¡Ir Directo a Jugar! 🚀
+            </button>
+        </div>
+
+        <!-- PANTALLA 3: EXPLICACIÓN DETALLADA (TUTORIAL) -->
+        <div class="screen" id="introDetailScreen">
+            <h2 class="title-screen" id="detailTitle">Sujeto</h2>
+            <div class="detail-wrapper">
+                <div class="giant-illustration-container">
+                    <div class="giant-illustration" id="detailImg">🐶</div>
+                </div>
+                <div class="bubble-speech" id="detailText">
+                    Cargando presentación divertida...
+                </div>
+                <button class="btn-audio-repeat" onclick="speakCurrentTutorial()">
+                    <i class="fa-solid fa-volume-high"></i> Repetir Audio 🔊
+                </button>
+                <div class="action-row">
+                    <button class="btn-sub" style="background: #A0AEC0; box-shadow: 0 6px 0px #718096;" onclick="backToSelection()">
+                        Atrás
+                    </button>
+                    <button class="btn-sub" style="background: var(--green-brand); box-shadow: 0 6px 0px #1fa195;" id="tutorialNextBtn" onclick="nextTutorial()">
+                        ¡Siguiente! ➡️
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- PANTALLA 4: JUEGO ACTIVO -->
+        <div class="screen" id="gameScreen">
+            <div class="progress-bar-container">
+                <div class="progress-fill" id="progressBar"></div>
+            </div>
+            <h2 class="question-title" id="gameQuestion">¿Dónde está el Sujeto?</h2>
+            <div class="question-helper" id="gameSubtitle">¡Toca la imagen correcta! 🔊</div>
+            <div class="game-options-grid" id="optionsGrid"></div>
+            <button class="btn-audio-repeat" onclick="speakCurrentQuestion()">
+                <i class="fa-solid fa-volume-high"></i> Volver a escuchar la pregunta 🔊
+            </button>
+        </div>
+
+        <!-- PANTALLA 5: CELEBRACIÓN FINAL -->
+        <div class="screen" id="congratsScreen">
+            <div class="congrats-emoji">🏆🥳👑</div>
+            <h1 style="font-size: 3.5rem; color: var(--pink-brand); text-shadow: 3px 3px 0px #fff;">¡Fantástico!</h1>
+            <p class="tagline" style="border-color: var(--green-brand); color: #2D3748;">¡Eres el rey o reina de las palabras! ⭐👑</p>
+            <button class="btn-giant" onclick="restartEverything()">
+                ¡Jugar otra vez! <i class="fa-solid fa-rotate-left"></i>
+            </button>
+        </div>
+
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
