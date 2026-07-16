@@ -1,4 +1,3 @@
-// --- 1. GENERACIÓN DE BURBUJAS DE FONDO ---
 const bContainer = document.getElementById('bubblesContainer');
 for (let i = 0; i < 15; i++) {
     const bubble = document.createElement('div');
@@ -12,14 +11,12 @@ for (let i = 0; i < 15; i++) {
     bContainer.appendChild(bubble);
 }
 
-// --- 2. SINTETIZADOR DE SONIDOS (Web Audio API) ---
 const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
 
 function playSoundEffect(type) {
     const now = audioCtx.currentTime;
 
     if (type === 'success') {
-        // Dos notas ascendentes alegres
         [523.25, 783.99].forEach((freq, i) => {
             const osc = audioCtx.createOscillator();
             const gain = audioCtx.createGain();
@@ -32,7 +29,6 @@ function playSoundEffect(type) {
             osc.stop(now + i * 0.12 + 0.3);
         });
     } else if (type === 'error') {
-        // Sonido suave descendente, nunca agresivo
         const osc = audioCtx.createOscillator();
         const gain = audioCtx.createGain();
         osc.type = 'sine';
@@ -56,7 +52,6 @@ function playSoundEffect(type) {
     }
 }
 
-// --- 3. VOZ (Web Speech API) ---
 function speak(text) {
     if (!('speechSynthesis' in window)) return;
     window.speechSynthesis.cancel();
@@ -67,7 +62,6 @@ function speak(text) {
     window.speechSynthesis.speak(utterance);
 }
 
-// --- 4. NAVEGACIÓN ENTRE PANTALLAS ---
 function showScreen(id) {
     document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
     document.getElementById(id).classList.add('active');
@@ -85,7 +79,6 @@ function showLearnSelection() {
     showScreen('learnSelectionScreen');
 }
 
-// --- 5. DATOS DE LOS CONCEPTOS (TUTORIAL) ---
 const conceptOrder = ['sujeto', 'predicado', 'pronombre', 'adjetivo'];
 
 const concepts = {
@@ -160,7 +153,6 @@ function backToSelection() {
     showScreen('learnSelectionScreen');
 }
 
-// --- 6. JUEGO ---
 const gameQuestions = [
     {
         concept: 'sujeto',
@@ -311,10 +303,6 @@ function checkGameAnswer(card, correct) {
         speak('¡Muy bien!');
         allCards.forEach(c => c.onclick = null);
 
-        speechSynthesis.addEventListener('end', function avanzar() {
-            speechSynthesis.removeEventListener('end', avanzar);
-        }, { once: true });
-
         setTimeout(() => {
             currentQuestionIndex++;
             if (currentQuestionIndex >= gameQuestions.length) {
@@ -331,7 +319,6 @@ function checkGameAnswer(card, correct) {
     }
 }
 
-// --- 7. PANTALLA FINAL Y CONFETI ---
 function showCongrats() {
     document.getElementById('progressBar').style.width = '100%';
     showScreen('congratsScreen');
